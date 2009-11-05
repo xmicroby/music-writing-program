@@ -25,7 +25,7 @@ public class MyImages
 		return img;
 	}
 	
-	public static Image getNoteImage(double beats, boolean flipped)
+	public static Image getNoteImage(int beats, boolean flipped)
 	{
 		//This doesn't correspond to the program:
 		//1 beat = quarter note, 4 = whole note, 1/2 = 1/8th note, usw....

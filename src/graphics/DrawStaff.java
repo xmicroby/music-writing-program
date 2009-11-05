@@ -17,7 +17,7 @@ public class DrawStaff extends JPanel
 {
 	public static final int BASE = 0, TREBLE = 1;
 	public static final int DIST_BETWEEN_LINES = 12;
-	public static final int LENGTH = 950;
+	public static final int LENGTH = 1350;
 	
 	private Line2D.Double[] lines = new Line2D.Double[10];
 	private ArrayList<Note> notes = new ArrayList<Note>();
@@ -89,7 +89,7 @@ public class DrawStaff extends JPanel
 		Note n = new Note(line, pos, type);
 		n.setAcc(acc);
 		notes.add(n);
-		pos += 50 * (n.getType() + 1);
+		pos += 50; //* (n.getType() + 1);
 	}
 	public void drawSelectedNote(int line, int type, int acc)
 	{
@@ -146,12 +146,12 @@ public class DrawStaff extends JPanel
 	}
 	public void remove(int index)
 	{
-		pos -= 50 * (notes.get(index).getType() + 1);
+		pos -= 50; //* (notes.get(index).getType() + 1);
 		notes.remove(index+1);
 	}
 	public void removeLastNote()
 	{
-		pos -= 50 * (notes.get(notes.size() - 1).getType() + 1);
+		pos -= 50; //* (notes.get(notes.size() - 1).getType() + 1);
 		notes.remove(notes.size() - 1);
 	}
 	public void deleteLastBarLine()

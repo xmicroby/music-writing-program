@@ -1,6 +1,7 @@
 package main;
 
 import graphics.DrawStaff;
+import graphics.MyImages;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -16,6 +17,8 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -25,6 +28,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
@@ -45,8 +49,8 @@ public class GUI extends JFrame implements KeyListener, ActionListener, MouseLis
 	private int position;
 	
 	private JButton[] selectLength;
-	private JButton addSharp, addFlat, addNat, selectKey, play,
-		deleteNote, clear, toStart, toEnd, moveRight, moveLeft;
+	private JButton play, deleteNote, clear, toStart, toEnd, moveRight, moveLeft, selectKey;
+	private JRadioButton addSharp, addFlat, addNat;
 	
 	private String key;
 	private Signature sign;
@@ -77,7 +81,9 @@ public class GUI extends JFrame implements KeyListener, ActionListener, MouseLis
 		staff.addMouseWheelListener(this);
 		add(staff);
 		
-		setSize(getMaximumSize());
+		setSize( 500, 500 );
+		this.setExtendedState( this.getExtendedState() | JFrame.MAXIMIZED_BOTH );
+
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
@@ -102,7 +108,6 @@ public class GUI extends JFrame implements KeyListener, ActionListener, MouseLis
 		
 		file.add(addMenu);
 		mb.add(file);
-		
 		
 		toStart = new JButton("<<<");
 		toStart.addActionListener(this);
@@ -137,7 +142,7 @@ public class GUI extends JFrame implements KeyListener, ActionListener, MouseLis
 		
 		for (int i = 0; i < selectLength.length; i++)
 		{
-			selectLength[i] = new JButton();
+			selectLength[i] = new JButton( new ImageIcon( MyImages.getNoteImage( i, false) ) );
 			selectLength[i].setText(Note.getLengthName(i) + " note");
 			selectLength[i].addActionListener(this);
 			selectLength[i].setActionCommand("length=" + i);
@@ -151,19 +156,25 @@ public class GUI extends JFrame implements KeyListener, ActionListener, MouseLis
 	{
 		JToolBar tb = new JToolBar();
 		
-		addSharp = new JButton("Sharp #");
+		ButtonGroup btnGroup = new ButtonGroup();
+		
+		addSharp = new JRadioButton("Sharp #");
 		addSharp.addActionListener(this);
 		addSharp.setActionCommand("sharp");
+		btnGroup.add( addSharp );
 		tb.add(addSharp);
 		
-		addFlat = new JButton("Flat b");
+		addFlat = new JRadioButton("Flat b");
 		addFlat.addActionListener(this);
 		addFlat.setActionCommand("flat");
+		btnGroup.add( addFlat );
 		tb.add(addFlat);
 		
-		addNat = new JButton("Natural");
+		addNat = new JRadioButton("Natural");
+		addNat.setSelected( true );
 		addNat.addActionListener(this);
 		addNat.setActionCommand("nat");
+		btnGroup.add( addNat );
 		tb.add(addNat);
 		
 		return tb;
@@ -202,21 +213,13 @@ public class GUI extends JFrame implements KeyListener, ActionListener, MouseLis
 	}
 	
 	
-	public void mouseClicked(MouseEvent e)
-	{
-	}
+	public void mouseClicked(MouseEvent e){}
 	
-	public void mouseEntered(MouseEvent e)
-	{
-	}
+	public void mouseEntered(MouseEvent e){}
 	
-	public void mouseExited(MouseEvent e)
-	{
-	}
+	public void mouseExited(MouseEvent e){}
 	
-	public void mousePressed(MouseEvent e)
-	{
-	}
+	public void mousePressed(MouseEvent e){}
 	
 	
 	public void mouseReleased(MouseEvent e)
